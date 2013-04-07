@@ -7,3 +7,8 @@
 	username		string			登录用户名
 	password		string			登录密码
 	subscriberId	string			手机卡IMSI
+	sms_prefix		string			短信号码前缀（+86）
+	
+2. 命令格式
+	命令需要加前缀"cmd:"+ 命令
+	命令以及命令参数之间以;进行分隔，参数为key:value形式字符串
