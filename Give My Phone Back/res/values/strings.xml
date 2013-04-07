@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">还我手机</string>
+    <string name="action_settings">设置</string>
+    <string name="inputUsernameAndPassword">请输入用户名和密码</string>
+    <string name="userLogin">用户登录</string>
+    <string name="setUsernameAndPassword">设置您的用户名和密码</string>
+    <string name="username">用户名</string>
+    <string name="password">密码</string>
+    <string name="old_password">原始密码</string>
+    <string name="new_password">新密码</string>
+    <string name="new_password_confirm">确认新密码</string>
+    <string name="login">登录</string>
+    <string name="ok">确定</string>
+    <string name="cancel">取消</string>
+    <string name="tip_usernameOrPaswordWrong">用户名或密码错误!</string>
+    <string name="success">成功</string>
+    <string name="failed">失败</string>
+    <string name="optSuccess">操作成功</string>
+    <string name="optFailed">操作失败</string>
+    <string name="error">错误</string>
+    <string name="loginSuccess">登录成功</string>
+    <string name="changePassword">修改密码</string>
+    <string name="startTrack">开始防盗</string>
+    <string name="stopTrack">停止防盗</string>
+    <string name="guardNumber">守卫号码</string>
+    <string name="guardNumberNotNull">守卫号码不能为空</string>
+    <string name="guardServiceStarted">防盗服务已开启</string>
+    <string name="guardServiceStoped">防盗服务已关闭</string>
+	<string name="back">返回</string>
+	<string name="passwordNotSame">两次输入密码不匹配</string>
+	<string name="newPasswordNotNull">新密码不能为空</string>
+	<string name="title_activity_change_password">修改密码</string>
+	<string name="old_password_error">原始密码错误</string>
+</resources>
