@@ -1,4 +1,4 @@
-GiveBackMyPhone
+一些Android小程序 
 ===============
 
-还我手机
+blog.orionis.name
