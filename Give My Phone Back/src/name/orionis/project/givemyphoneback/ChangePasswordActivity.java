@@ -1,5 +1,6 @@
 package name.orionis.project.givemyphoneback;
 
+import name.orionis.project.givemyphoneback.helper.EncryptHelper;
 import name.orionis.project.givemyphoneback.helper.ToastHelper;
 import android.os.Bundle;
 import android.app.Activity;
@@ -35,9 +36,10 @@ public class ChangePasswordActivity extends Activity {
 			return;
 		}
 		
-		if(sharedPreferences.getString("password", "").equals(old_password.getText().toString())){
+		if(sharedPreferences.getString("password", "").equals(
+				EncryptHelper.md5(old_password.getText().toString()))){
 			Editor edit = sharedPreferences.edit();
-			edit.putString("password", new_password.getText().toString().trim());
+			edit.putString("password", EncryptHelper.md5(new_password.getText().toString().trim()));
 			edit.commit();
 			
 			ToastHelper.showMessage(this, getResources().getString(R.string.optSuccess));
