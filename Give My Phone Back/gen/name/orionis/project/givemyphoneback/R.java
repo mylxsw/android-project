@@ -64,6 +64,7 @@ public final class R {
         public static final int guardNumberNotNull=0x7f050018;
         public static final int guardServiceStarted=0x7f050019;
         public static final int guardServiceStoped=0x7f05001a;
+        public static final int has_change_number=0x7f050020;
         public static final int inputUsernameAndPassword=0x7f050002;
         public static final int login=0x7f05000a;
         public static final int loginSuccess=0x7f050013;

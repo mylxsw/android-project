@@ -1,5 +1,6 @@
 package name.orionis.project.givemyphoneback;
 
+import name.orionis.project.givemyphoneback.helper.SmsHelper;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -12,6 +13,8 @@ import android.telephony.TelephonyManager;
  */
 public class BootstrapReceiver extends BroadcastReceiver {
 	private SharedPreferences sharPreferences;
+	
+	final public static String CHANGE_SIM = "CHANGE_SIM";
 	
 	@Override
 	public void onReceive(Context context, Intent intent) {
@@ -31,8 +34,9 @@ public class BootstrapReceiver extends BroadcastReceiver {
 		}
 		//IMSI不一致，说明已经换卡
 		
-		
-		
+		//发送给安全号码短消息，提醒换号
+		SmsHelper smsHelper = SmsHelper.getInstance(context);
+		smsHelper.sendMessage(sharPreferences.getString("guardNumber", "10010"), 
+				context.getResources().getString(R.string.has_change_number),CHANGE_SIM);
 	}
-
 }

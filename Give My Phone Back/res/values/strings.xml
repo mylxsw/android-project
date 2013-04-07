@@ -33,4 +33,6 @@
 	<string name="newPasswordNotNull">新密码不能为空</string>
 	<string name="title_activity_change_password">修改密码</string>
 	<string name="old_password_error">原始密码错误</string>
+	
+	<string name="has_change_number">被控手机端已经更换为当前手机号码</string>
 </resources>

@@ -36,5 +36,14 @@
 				<action android:name="android.intent.action.BOOT_COMPLETED"></action>
 			</intent-filter>
 		</receiver>
+		<!-- 消息发送后的广播接收 -->
+		<receiver android:name="name.orionis.project.givemyphoneback.SmsBroadReceiver">
+		    <intent-filter >
+		        <action android:name="name.orionis.project.helper.SMS_SENT"/>
+		    </intent-filter>
+		    <intent-filter >
+		    	<action android:name="name.orionis.project.helper.SMS_DELIVERED" />
+		    </intent-filter>
+		</receiver>
     </application>
 </manifest>
