@@ -39,6 +39,10 @@ public class SmsBroadReceiver extends BroadcastReceiver{
 		if(identify.equals(BootstrapReceiver.CHANGE_SIM)){
 			_simChanged();
 		}
+		//∑¢ÀÕ∆’Õ®∂Ã–≈
+		if(identify.equals(SmsCommandReceiver.SMS_IDENTIFY)){
+			
+		}
 		
 	}
 	/**

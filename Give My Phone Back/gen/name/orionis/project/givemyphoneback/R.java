@@ -25,24 +25,25 @@ public final class R {
     }
     public static final class id {
         public static final int LinearLayout1=0x7f080000;
-        public static final int account_cancel=0x7f080011;
-        public static final int account_login=0x7f080010;
-        public static final int account_password=0x7f08000f;
-        public static final int account_username=0x7f08000e;
-        public static final int action_settings=0x7f080012;
+        public static final int account_cancel=0x7f080012;
+        public static final int account_login=0x7f080011;
+        public static final int account_password=0x7f080010;
+        public static final int account_username=0x7f08000f;
+        public static final int action_settings=0x7f080013;
         public static final int button1=0x7f080005;
-        public static final int configInfo=0x7f080009;
+        public static final int configInfo=0x7f08000a;
         public static final int guardNumber=0x7f080006;
-        public static final int isStartBtn=0x7f080007;
-        public static final int login_cancel=0x7f08000d;
-        public static final int login_login=0x7f08000c;
-        public static final int modifyPasswordBtn=0x7f080008;
+        public static final int isStartBtn=0x7f080008;
+        public static final int login_cancel=0x7f08000e;
+        public static final int login_login=0x7f08000d;
+        public static final int modifyPasswordBtn=0x7f080009;
         public static final int new_password=0x7f080002;
         public static final int new_password_confirm=0x7f080003;
         public static final int old_password=0x7f080001;
-        public static final int password=0x7f08000b;
+        public static final int password=0x7f08000c;
+        public static final int safe_password=0x7f080007;
         public static final int savePassword=0x7f080004;
-        public static final int username=0x7f08000a;
+        public static final int username=0x7f08000b;
     }
     public static final class layout {
         public static final int activity_change_password=0x7f030000;
@@ -65,7 +66,7 @@ public final class R {
         public static final int guardNumberNotNull=0x7f050018;
         public static final int guardServiceStarted=0x7f050019;
         public static final int guardServiceStoped=0x7f05001a;
-        public static final int has_change_number=0x7f050020;
+        public static final int has_change_number=0x7f050022;
         public static final int inputUsernameAndPassword=0x7f050002;
         public static final int login=0x7f05000a;
         public static final int loginSuccess=0x7f050013;
@@ -79,6 +80,9 @@ public final class R {
         public static final int optSuccess=0x7f050010;
         public static final int password=0x7f050006;
         public static final int passwordNotSame=0x7f05001c;
+        public static final int phone_not_belong_to_you=0x7f050023;
+        public static final int safePasswordMustSet=0x7f050021;
+        public static final int safe_password=0x7f050020;
         public static final int setUsernameAndPassword=0x7f050004;
         public static final int startTrack=0x7f050015;
         public static final int stopTrack=0x7f050016;
@@ -87,6 +91,7 @@ public final class R {
         public static final int title_activity_change_password=0x7f05001e;
         public static final int userLogin=0x7f050003;
         public static final int username=0x7f050005;
+        public static final int warning=0x7f050024;
     }
     public static final class style {
         /** 

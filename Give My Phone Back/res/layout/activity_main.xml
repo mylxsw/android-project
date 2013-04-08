@@ -21,6 +21,14 @@
         <requestFocus />
     </EditText>
 
+    <EditText
+        android:id="@+id/safe_password"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="@string/safe_password"
+        android:inputType="numberPassword" />
+
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content" >

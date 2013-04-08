@@ -32,6 +32,7 @@ public class MainActivity extends FragmentActivity implements FragmentActionList
 	private ToggleButton isStartBtn;
 	private EditText guardNumber ;
 	private Button changePasswordBtn;
+	private EditText safe_password_c ;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -59,18 +60,22 @@ public class MainActivity extends FragmentActivity implements FragmentActionList
 		isStartBtn = (ToggleButton) findViewById(R.id.isStartBtn);
 		guardNumber = (EditText) findViewById(R.id.guardNumber);
 		changePasswordBtn = (Button) findViewById(R.id.modifyPasswordBtn);
+		safe_password_c = (EditText) findViewById(R.id.safe_password);
 		
 		guardNumber.setText(sharedPreferences.getString("guardNumber", ""));
+		
 		
 		boolean isTracking = sharedPreferences.getBoolean("tracking", false);
 		if(isTracking){//已经开启了追踪
 			isStartBtn.setChecked(true);
 			guardNumber.setEnabled(false);
+			safe_password_c.setEnabled(false);
 		}else{//没有开启
 			isStartBtn.setChecked(false);
 			guardNumber.setEnabled(true);
+			safe_password_c.setEnabled(true);
 		}
-		
+		//开始追踪按钮事件
 		isStartBtn.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
 			
 			@Override
@@ -82,7 +87,7 @@ public class MainActivity extends FragmentActivity implements FragmentActionList
 				}
 			}
 		});
-		
+		//修改密码按钮事件
 		changePasswordBtn.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
@@ -103,16 +108,36 @@ public class MainActivity extends FragmentActivity implements FragmentActionList
 		TextView textView = (TextView) findViewById(R.id.configInfo);
 		textView.setText(debuginfo.toString());
 	}
+	/**
+	 * 启用追踪
+	 */
 	private void _startTracking(){
+		//守卫号码为空的话，不允许操作
 		if(guardNumber.getText().toString().trim().equals("")){
 			ToastHelper.showMessage(this, getResources().getString(R.string.guardNumberNotNull));
 			isStartBtn.setChecked(false);
 			return;
 		}
+		//安全密码不能为空
+		String safe_password = safe_password_c.getText().toString().trim();
+		boolean flag = true;//标志，true则需要保存密码
+		if(safe_password.equals("")){
+			String saved_pwd = sharedPreferences.getString("safe_key", "");
+			flag = saved_pwd.equals("");
+			if(flag){
+				ToastHelper.showMessage(this, getResources().getString(R.string.safePasswordMustSet));
+				isStartBtn.setChecked(false);
+				return;
+			}
+		}
+		//保存配置信息
 		guardNumber.setEnabled(false);
+		safe_password_c.setEnabled(false);
 		Editor edit = sharedPreferences.edit();
 		edit.putBoolean("tracking", true);
 		edit.putString("guardNumber", guardNumber.getText().toString());
+		if(flag)
+			edit.putString("safe_key", EncryptHelper.md5(safe_password));
 		
 		TelephonyManager tm = (TelephonyManager) getSystemService(
 				Context.TELEPHONY_SERVICE);
@@ -122,8 +147,12 @@ public class MainActivity extends FragmentActivity implements FragmentActionList
 		
 		ToastHelper.showMessage(this, getResources().getString(R.string.guardServiceStarted));
 	}
+	/**
+	 * 停止跟踪
+	 */
 	private void _stopTracking(){
 		guardNumber.setEnabled(true);
+		safe_password_c.setEnabled(true);
 		Editor edit = sharedPreferences.edit();
 		edit.putBoolean("tracking", false);
 		edit.commit();
