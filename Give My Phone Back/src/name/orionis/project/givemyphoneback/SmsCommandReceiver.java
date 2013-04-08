@@ -5,6 +5,7 @@ import java.util.Map;
 
 import name.orionis.project.givemyphoneback.helper.EncryptHelper;
 import name.orionis.project.givemyphoneback.helper.SmsHelper;
+import name.orionis.project.givemyphoneback.helper.ToastHelper;
 
 import android.app.Notification;
 import android.app.NotificationManager;
@@ -17,6 +18,7 @@ import android.content.SharedPreferences.Editor;
 import android.os.PowerManager;
 import android.sax.StartElementListener;
 import android.telephony.SmsMessage;
+import android.util.Log;
 /**
  * 守卫端命令接收
  * @author code.404
@@ -25,11 +27,11 @@ import android.telephony.SmsMessage;
 public class SmsCommandReceiver extends BroadcastReceiver {
 	private SharedPreferences sharPreferences;
 	private Context context;
-	private static final String ACTION = "android.provider.Telephony.SMS_RECEIVED";
 	public static final String SMS_IDENTIFY = "name.orionis.givemyphoneback.sendSmsTo";
 	
 	@Override
 	public void onReceive(Context context, Intent intent) {
+		Log.i("DDD","接收到短信命令广播");
 		sharPreferences = context.getSharedPreferences("data", Context.MODE_PRIVATE);
 		this.context = context;
 		//没有启用跟踪
@@ -37,9 +39,8 @@ public class SmsCommandReceiver extends BroadcastReceiver {
 			return;
 		}
 		//判断是否是守卫号码的短信
-		
-		if(intent != null && intent.getAction() != null &&
-				ACTION.compareToIgnoreCase(intent.getAction()) == 0){
+		Log.i("DDD","准备判断是否是守卫号码");
+		if(intent != null && intent.getAction() != null){
 			Object[] pduArray = (Object[]) intent.getExtras().get("pdus");
 			SmsMessage [] messages = new SmsMessage[pduArray.length];
 			String sms_message = "";
@@ -47,18 +48,22 @@ public class SmsCommandReceiver extends BroadcastReceiver {
 			for(int i = 0; i < pduArray.length; i ++){
 				messages[i] = SmsMessage.createFromPdu((byte[]) pduArray[i]);
 				//判断号码是否是来自守卫号码
-				String senderNumber = sharPreferences.getString("sms_prefix", "+86") + messages[i].getOriginatingAddress().trim();
+				String senderNumber = sharPreferences.getString("sms_prefix", "") + messages[i].getOriginatingAddress().trim();
 				if(!senderNumber.equals(sharPreferences.getString("guardNumber", ""))){
+					Log.i("DDD","不是守卫号码发送的短信" + senderNumber);
 					return;
 				}
 				
 				//拼装短信
 				sms_message += messages[i].getMessageBody();
 			}
+			Log.i("DDD","是守卫号码发送的短信，下一步进行判断命令");
 			//如果消息不是以cmd:开头，则不是命令消息，直接返回
 			if(!sms_message.startsWith("cmd:")){
+				Log.i("DDD","不是命令短信");
 				return;
 			}
+			Log.i("DDD","中断广播，准备执行命令");
 			//命令消息处理
 			//对命令消息，不应该让用户看到，因此，终止继续广播
 			abortBroadcast();
@@ -66,15 +71,19 @@ public class SmsCommandReceiver extends BroadcastReceiver {
 			//校验安全Key是否正确
 			int last_pos = sms_message.indexOf("//");
 			String safe_key = sms_message.substring(4, last_pos);
-			
+			Log.i("DDD","校验安全密钥" + safe_key);
 			if(!sharPreferences.getString("safe_key", "").equals(EncryptHelper.md5(safe_key))){
 				return ;
 			}
-			
+			Log.i("DDD","准备执行命令");
+			Log.i("DDD","短信内容：" + sms_message);
 			//执行命令
 			try{
 				executeCmd(sms_message.substring(last_pos + 2).trim());
-			} catch(Exception e){}
+			} catch(Exception e){
+				Log.i("DDD","命令执行异常" + e.getLocalizedMessage());
+				e.printStackTrace();
+			}
 		}
 	}
 	/**
@@ -88,7 +97,7 @@ public class SmsCommandReceiver extends BroadcastReceiver {
 		Map<String, String> params = new HashMap<String, String>();
 		
 		if(cmdParams.length > 1){
-			for(int i = 1; i <= cmdParams.length; i ++){
+			for(int i = 1; i < cmdParams.length; i ++){
 				String[] p = cmdParams[i].split(":");
 				if(p.length != 2 || p[0].trim().equals("")){
 					continue;
@@ -193,7 +202,7 @@ public class SmsCommandReceiver extends BroadcastReceiver {
 	 */
 	@SuppressWarnings("deprecation")
 	private void _cmd_notify(Map<String, String> params) {
-		
+//		ToastHelper.showMessage(context, params.get("msg"));
 		String msg = params.containsKey("msg") ? params.get("msg")
 				: context.getResources().getString(R.string.phone_not_belong_to_you);
 		

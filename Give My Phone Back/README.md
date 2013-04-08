@@ -7,7 +7,7 @@
 	username		string			登录用户名
 	password		string			登录密码
 	subscriberId	string			手机卡IMSI
-	sms_prefix		string			短信号码前缀（+86）
+	sms_prefix		string			短信号码前缀
 	safe_key		String			安全密码，用于控制
 2. 命令格式
 	命令需要加前缀"cmd:安全密码+//"+ 命令
