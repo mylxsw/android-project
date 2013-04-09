@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">亲兄弟明算账</string>
+    <string name="action_settings">Settings</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="writeAccount">记账</string>
+    <string name="viewHistory">查看历史账目</string>
+    <string name="viewOptLog">查看操作记录</string>
+    <string name="modifyPersonalInfo">修改个人信息</string>
+    <string name="title_activity_write_account">WriteAccountActivity</string>
+
+</resources>

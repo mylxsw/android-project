@@ -1,0 +1,31 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+
+    <Button
+        android:id="@+id/writeAccount"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/writeAccount"
+        android:onClick="writeAccount" />
+
+    <Button
+        android:id="@+id/viewHistory"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/viewHistory" />
+
+    <Button
+        android:id="@+id/viewOptLog"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/viewOptLog" />
+
+    <Button
+        android:id="@+id/modifyPersonalInfo"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/modifyPersonalInfo" />
+
+</LinearLayout>
